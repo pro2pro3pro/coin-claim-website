@@ -1,0 +1,16 @@
+const ipLogPath = path.resolve('data/ip-logs.json')
+
+export async function logClaimedIP(ip, service) {
+  let data = []
+  try {
+    data = JSON.parse(await fs.readFile(ipLogPath, 'utf8'))
+  } catch (e) {}
+
+  data.push({
+    ip,
+    service,
+    date: new Date().toISOString(),
+  })
+
+  await fs.writeFile(ipLogPath, JSON.stringify(data, null, 2))
+}

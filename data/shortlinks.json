@@ -1,0 +1,12 @@
+{
+  "xyz789": {
+    "userId": "1234567890",
+    "linkType": "yeumoney",
+    "createdAt": "2025-08-05T10:00:00Z"
+  },
+  "abc123": {
+    "userId": "9876543210",
+    "linkType": "bbmkts",
+    "createdAt": "2025-08-05T11:00:00Z"
+  }
+}

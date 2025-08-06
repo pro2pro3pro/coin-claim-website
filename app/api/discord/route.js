@@ -6,7 +6,7 @@ const SHORTEN_LINKS = {
   bbmkts: 'https://bbmakts.com/ql?token=9603c4d2b8ddcfaad8f592e9&longurl='
 };
 
-const BASE_CLAIM_URL = 'http://localhost:3000/'; // 👈 đổi thành tên miền thật của bạn
+const BASE_CLAIM_URL = 'https://coin-claim-website.vercel.app/'; // 👈 đổi thành tên miền thật của bạn
 
 async function generateShortLink(service, subid) {
   const url = `${SHORTEN_LINKS[service]}${BASE_CLAIM_URL}${subid}`;
