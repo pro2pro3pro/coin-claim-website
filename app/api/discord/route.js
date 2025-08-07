@@ -1,24 +1,51 @@
 // app/api/discord/route.js
+import { InteractionResponseType, InteractionType, verifyKey } from 'discord-interactions';
+
+const DISCORD_PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY;
 
 export async function POST(req) {
-  try {
-    const body = await req.json();
+  const signature = req.headers.get('x-signature-ed25519');
+  const timestamp = req.headers.get('x-signature-timestamp');
+  const body = await req.text();
 
-    // Discord gửi type: 1 để xác thực endpoint
-    if (body.type === 1) {
-      return new Response(JSON.stringify({ type: 1 }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
+  const isValidRequest = verifyKey(body, signature, timestamp, DISCORD_PUBLIC_KEY);
+  if (!isValidRequest) return new Response('Invalid request signature', { status: 401 });
+
+  const interaction = JSON.parse(body);
+
+  if (interaction.type === InteractionType.PING) {
+    return Response.json({ type: InteractionResponseType.PONG });
+  }
+
+  if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+    const { name } = interaction.data;
+
+    if (name === 'getcoin') {
+      // Reply hiển thị menu chọn dịch vụ rút gọn
+      return Response.json({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: 'Chọn 1 dịch vụ để lấy link nhận coin:',
+          components: [
+            {
+              type: 1, // Action Row
+              components: [
+                {
+                  type: 3, // Select Menu
+                  custom_id: 'select_service',
+                  options: [
+                    { label: 'YeuMoney', value: 'yeumoney' },
+                    { label: 'Link4m', value: 'link4m' },
+                    { label: 'Bbmkts', value: 'bbmkts' }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       });
     }
-
-    // TODO: Xử lý các loại interaction khác (slash command /getcoin, v.v.)
-    return new Response(JSON.stringify({ message: "Chưa xử lý interaction này" }), {
-      status: 200,
-    });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: "Lỗi xử lý request" }), {
-      status: 400,
-    });
   }
+
+  return new Response('Not handled', { status: 400 });
 }
