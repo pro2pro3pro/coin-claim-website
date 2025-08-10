@@ -1,20 +1,19 @@
 ﻿{
-  "name": "coin-claim-website-vercel-ready",
+  "name": "coin-claim-website",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'No build step, serverless endpoints ready'"
   },
   "dependencies": {
-    "next": "14.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "node-fetch": "^2.6.7",
+    "express": "^4.18.2",
     "sqlite3": "^5.1.6",
+    "node-fetch": "^2.6.7",
     "dayjs": "^1.11.9",
     "uuid": "^9.0.0",
+    "body-parser": "^1.20.2",
     "request-ip": "^3.3.0",
     "discord-interactions": "^3.0.0"
   }
