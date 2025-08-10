@@ -1,15 +1,8 @@
-
-README - coin-claim-website-final
----------------------------------
-Quick start:
-
-1) unzip and place on your server or use Vercel. This package runs as a simple express server for local testing.
-2) Install deps: npm install
-3) Run locally: npm run dev
-4) To register commands: POST to /api/register-commands after setting env (or run curl -X POST https://your-host/api/register-commands)
-5) Deploy on Vercel: create project from this repo, set Environment Variables from .env, then deploy.
-6) Set a weekly cron to call /api/cron/reset to reset normal coins.
-
-Notes:
-- This is a compact full implementation using SQLite and the shortener APIs you provided.
-- For production, rotate Discord tokens after testing since they were included here.
+﻿README - coin-claim-website-vercel-ready
+---------------------------------------
+1) Unzip and inspect. Place real secrets into Vercel Environment Variables (do NOT commit .env).
+2) Endpoints (placeholders):
+   - POST /api/discord  -> Discord interactions endpoint (must implement verifyKey and interaction logic)
+   - GET  /out/:subid   -> Redirect endpoint for shortener to return users to (auto-validate)
+3) To create deployment ZIP:
+   Compress-Archive -Path 'C:\Users\Home\Desktop\coin-claim-website-vercel-ready\*' -DestinationPath 'C:\Users\Home\Desktop\coin-claim-website-vercel-ready.zip'
