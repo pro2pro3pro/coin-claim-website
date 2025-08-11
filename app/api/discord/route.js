@@ -28,8 +28,12 @@ export async function POST(req){
   const signature = req.headers.get('x-signature-ed25519');
   const timestamp = req.headers.get('x-signature-timestamp');
   const bodyText = await req.text();
-  if(!verifyKey(bodyText, signature, timestamp, DISCORD_PUBLIC_KEY)){
-    return new Response('invalid signature', { status: 401 });
+  try{
+    if(!verifyKey(bodyText, signature, timestamp, DISCORD_PUBLIC_KEY)){
+      return new Response('invalid signature', { status: 401 });
+    }
+  }catch(e){
+    return new Response('invalid signature', { status:401 });
   }
   const body = JSON.parse(bodyText);
   if(body.type === 1) return new Response(JSON.stringify({ type:1 }), { status:200, headers:{ 'Content-Type':'application/json' }});
@@ -39,11 +43,11 @@ export async function POST(req){
     if(name === 'getcoin'){
       const service = body.data.options?.[0]?.value || 'yeumoney';
       const subid = uuidv4().slice(0,8);
-      const target = ${BASE_URL}/out/?d=;
+      const target = ${BASE_URL}/api/out/?d=;
       const short = await shorten(service, target) || target;
       const db = await getDb();
       await db.run('INSERT OR REPLACE INTO shortlinks(subid,service,discordId,shortenedUrl,createdAt,completed) VALUES (?,?,?,?,?,?)', [subid,service,discordId,short,new Date().toISOString(),0]);
-      // post public message
+      // public message
       const channelId = body.channel_id;
       await fetch(https://discord.com/api/v10/channels//messages, {
         method:'POST', headers:{ Authorization:Bot , 'Content-Type':'application/json' },
@@ -55,7 +59,7 @@ export async function POST(req){
       if(dmJ.id){
         await fetch(https://discord.com/api/v10/channels//messages, { method:'POST', headers:{ Authorization:Bot , 'Content-Type':'application/json' }, body: JSON.stringify({ content: Link nhận coin ():  })});
       }
-      return new Response(JSON.stringify({ type:4, data:{ content:'Đã gửi link về DM!' } }), { status:200, headers:{ 'Content-Type':'application/json' }});
+      return new Response(JSON.stringify({ type:4, data:{ content:'Đã gửi link về DM!' } }), { status:200, headers:{ 'Content-Type':'application/json' } });
     }
     if(name === 'checkcoin'){
       const discordId = body.member?.user?.id || body.user?.id;
@@ -65,7 +69,7 @@ export async function POST(req){
       const vip = user?.vipCoin || 0;
       const total = normal + vip;
       const content = 📜 Thông tin coin người dùng\\n🔵Bạn còn:  coin\\n🟢Normal coin:  coin\\n🟡Vip coin:  coin\\n🔴Lưu ý: Normal coin sẽ reset vào thứ 2 hằng tuần\\n🟣Tổng tuần:  coin\\n🟣Tổng tháng:  coin;
-      return new Response(JSON.stringify({ type:4, data:{ content } }), { status:200, headers:{ 'Content-Type':'application/json' }});
+      return new Response(JSON.stringify({ type:4, data:{ content } }), { status:200, headers:{ 'Content-Type':'application/json' } });
     }
   }
   return new Response('not handled', { status:400 });
