@@ -9,3 +9,13 @@ export default function Page(){
         </div>
       </header>
       <section style={{marginTop:24,background:"linear-gradient(180deg, rgba(14,165,233,0.04), rgba(6,182,212,0.02))",padding:16,borderRadius:12}}>
+        <h3 style={{marginTop:0}}>Hướng dẫn nhanh</h3>
+        <ol>
+          <li>vào server discord </code>.</li>
+          <li>Dùng lệnh /getcoin để nhận coin</li>
+          <li>Dùng lệnh /checkcoin để kiểm tra checkcoin.</li>
+        </ol>
+      </section>
+    </main>
+  )
+}
