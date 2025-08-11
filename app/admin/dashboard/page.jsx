@@ -12,7 +12,7 @@ export default function Page(){
     const d = await (await fetch("/api/admin/stats")).json(); setData(d);
   }
   return (
-    <main style={{fontFamily:"Inter, Arial, sans-serif",padding:24}}>
+    <main style={{padding:24}}>
       <h2>Admin Dashboard</h2>
       <section style={{marginTop:12}}>
         <h3>Users</h3>

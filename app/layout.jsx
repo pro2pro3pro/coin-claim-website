@@ -1,13 +1,13 @@
-// app/layout.jsx
 export const metadata = {
-  title: 'Coin Claim Website',
-  description: 'Nhận coin miễn phí',
+  title: "coin-claim-website",
+  description: "Nhận coin miễn phí"
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="vi">
-      <body>
+      <head />
+      <body style={{ margin:0, fontFamily:"Inter, Arial, sans-serif", background:"#010217" }}>
         {children}
       </body>
     </html>

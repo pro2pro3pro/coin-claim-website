@@ -11,7 +11,7 @@ export default function Page(){
     else setErr("Mật khẩu sai hoặc lỗi server");
   }
   return (
-    <main style={{fontFamily:"Inter, Arial, sans-serif",padding:24,maxWidth:720,margin:"0 auto"}}>
+    <main style={{padding:24,maxWidth:720,margin:"0 auto"}}>
       <div style={{background:"linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))",padding:20,borderRadius:12}}>
         <h2>Đăng nhập Admin</h2>
         <input value={pw} onChange={e=>setPw(e.target.value)} placeholder="Nhập mật khẩu admin" style={{padding:10,width:"100%",marginTop:8,borderRadius:8}} />

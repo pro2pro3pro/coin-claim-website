@@ -17,7 +17,7 @@ export default function Page({ params, searchParams }){
           <img src="/logo.svg" style={{width:64,height:64}} alt="logo"/>
           <div>
             <h1 style={{margin:0}}>Claim {subid}</h1>
-            <div style={{color:"#9fb3c8"}}>Người yêu cầu: <strong>{info?.discordId || "—"}</strong> • Service: <strong>{info?.service || "—"}</strong></div>
+            <div style={{color:"#9fb3c8"}}>Người yêu cầu: <strong>{info?.discordId || "-"}</strong> • Service: <strong>{info?.service || "-"}</strong></div>
           </div>
         </div>
 

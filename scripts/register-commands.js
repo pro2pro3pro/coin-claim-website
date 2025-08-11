@@ -1,7 +1,3 @@
-/**
- * node scripts/register-commands.js
- * Make sure you have DISCORD_CLIENT_ID, GUILD_ID, DISCORD_BOT_TOKEN in your env
- */
 const fetch = require("node-fetch");
 require("dotenv").config();
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID;

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 export async function POST(req){
   const cookie = req.headers.get("cookie") || "";
   if(!cookie.includes("admin_auth=1")) return NextResponse.json({ error:"unauth" }, { status:401 });
-  // call register API using env (server side)
   try{
     const clientId = process.env.DISCORD_CLIENT_ID;
     const guildId = process.env.GUILD_ID;
