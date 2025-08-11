@@ -1,13 +1,6 @@
 {
   "version": 2,
   "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/discord", "dest": "server.js" },
-    { "src": "/api/(.*)", "dest": "server.js" },
-    { "src": "/out/(.*)", "dest": "server.js" },
-    { "src": "/claim/(.*)", "dest": "server.js" },
-    { "src": "/(.*)", "dest": "server.js" }
+    { "src": "package.json", "use": "@vercel/next" }
   ]
 }
